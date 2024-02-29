@@ -20,7 +20,7 @@ This version can be found in the `python_cpp` directory.
 
 Please refer to the [README](./python_cpp/README.md) file to get started on using our Python & C++ version of uPIMulator.
 
-## The Go Verison
+## The Go Version
 The Go version is our second implementation of uPIMulator which we optimzed to improve its simulation speed while reducing its memory consumption.
 This version can be found in the `golang` directory.
 
@@ -66,4 +66,4 @@ This research is supported by the National Research Foundation of Korea (NRF), I
 Samsung Electronics.
 
 ## 📔 Citation
-Bongjoon Hyun, Dongjae Lee, Taehun Kim, and Minsoo Rhu, "Pathfinding Future PIM Architectures by Demystifying a Commercial PIM Technology". IEEE International Symposium on High-Performance Computer Architecture, March 2024.
+Bongjoon Hyun, Taehun Kim, Dongjae Lee, and Minsoo Rhu, "Pathfinding Future PIM Architectures by Demystifying a Commercial PIM Technology". IEEE International Symposium on High-Performance Computer Architecture, March 2024.
