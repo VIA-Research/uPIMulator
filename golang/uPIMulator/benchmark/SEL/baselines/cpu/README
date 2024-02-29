@@ -1,0 +1,12 @@
+Select (SEL)
+
+Compilation instructions
+
+    make
+
+Execution instructions
+
+    ./sel -i 1258291200 -t 4
+
+Read more
+J. Gomez-Luna et al., “In-place Data Sliding Algorithms for Many-core Architectures,” ICPP 2015.

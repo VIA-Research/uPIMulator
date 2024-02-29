@@ -1,0 +1,20 @@
+Unique (UNI)
+
+Compilation instructions
+
+    make
+
+Execution instructions
+
+    ./unique 0 50 1258291200
+
+Compilation flags
+
+    FLOAT - For single precision arrays (Default: Double precision)
+    INT - For integer arrays
+    THREADS - Thread block size (Default: 1024)
+    COARSENING - Coarsening factor (Default: 16 (SP and INT); 8 (DP))
+    ATOMIC - Global atomics for synchronization (Default: No atomics)
+
+Read more
+J. Gomez-Luna et al., “In-place Data Sliding Algorithms for Many-core Architectures,” ICPP 2015.

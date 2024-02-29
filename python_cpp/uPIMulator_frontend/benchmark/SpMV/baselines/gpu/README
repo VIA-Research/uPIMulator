@@ -1,0 +1,9 @@
+Sparse Matrix Vector Multiplication (SpMV)
+
+Compilation instructions
+
+    make
+
+Execution instructions
+
+    ./spmv -f ../../data/bcsstk30.mtx 

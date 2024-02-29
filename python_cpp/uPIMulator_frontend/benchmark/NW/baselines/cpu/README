@@ -1,0 +1,9 @@
+Needleman-Wunsch (NW)
+
+Compilation instructions
+
+    make
+
+Execution instructions
+
+    ./needle 46080 10 4

@@ -1,0 +1,24 @@
+Histogram - input partition (HST)
+
+Compilation instructions:
+
+    make
+
+Execution instructions
+
+    ./hsti -n 1006632960 -g 512
+
+For more options:
+
+    ./hsti -h
+
+
+Note:
+The input folder contains one image from Van Hateren's natural image database 
+(http://www.kyb.tuebingen.mpg.de/?id=227). Image pixels are 12-bit depth. Thus, 
+for calculation of the B-bin histogram of an image, the corresponding histogram 
+bin is computed as ((pixel * B) >> 12).
+Monochrome images from other databases or synthetic images can also be used. The 
+read input function (in main.cpp) might need to be changed accordingly. If image 
+pixels are b-bit depth and the histogram contains B bins, the histogram bin will 
+be computed as ((pixel * B) >> b).

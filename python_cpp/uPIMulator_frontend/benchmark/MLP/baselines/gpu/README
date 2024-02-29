@@ -1,0 +1,9 @@
+Multilayer Perceptron (MLP)
+
+Compilation instructions
+
+    make
+
+Execution instructions
+
+    ./mlp
