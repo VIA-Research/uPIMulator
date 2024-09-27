@@ -1,0 +1,9 @@
+Binary Search (BS)
+
+Compilation instructions:
+
+    make
+
+Execution instructions
+
+    ./bs_omp 2048576 16777216

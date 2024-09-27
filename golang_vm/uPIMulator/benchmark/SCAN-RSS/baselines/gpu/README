@@ -1,0 +1,9 @@
+Prefix sum (SCAN)
+
+Compilation instructions
+
+    TYPE=UINT64 make
+
+Execution instructions
+
+    ./scan -i 1258291200

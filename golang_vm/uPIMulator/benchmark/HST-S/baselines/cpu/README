@@ -1,0 +1,13 @@
+Histogram - input partition (HST)
+
+Compilation instructions:
+
+    make
+
+Execution instructions
+
+    ./hist -y 1006632960 -t 4
+
+For more options:
+
+    ./hsti -h

@@ -1,0 +1,16 @@
+In-place matrix transposition (TRNS)
+
+Compilation instructions
+
+    make
+
+Execution instructions
+
+    ./trns -w 0 -r 1 -m 16 -n 8 -o 4096 -p 2556 -i 64
+
+For more options
+
+    ./trns -h
+
+Read more
+J. Gomez-Luna et al., “In-place Matrix Transposition on GPUs,” IEEE TPDS, 2016.

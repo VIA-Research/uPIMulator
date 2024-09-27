@@ -1,0 +1,15 @@
+package instruction
+
+type Exception int
+
+const (
+	MEMORY_FAULT Exception = iota
+	DMA_FAULT
+	HEAP_FULL
+	DIVISION_BY_ZERO
+	ASSERT
+	HALT
+	PRINT_OVERFLOW
+	ALREADY_PROFILING
+	NOT_PROFILING
+)
