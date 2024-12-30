@@ -8,7 +8,7 @@ The typical usage workflow comprises two primary stages:
 1. **Binary Generation:** Compile, assemble, and link your application code to generate the required binary files for simulation.
 2. **Cycle-Level Simulation:** Utilize the generated binary files as input to the cycle-level simulator to obtain detailed performance metrics and insights.
 
-We are actively working on expanding uPIMulator's capabilities and may introduce additional usage modes in future releases.
+We aim to expand uPIMulator's capabilities and may introduce additional usage modes in future releases.
 
 ## Installation & Build
 ### Prerequisites
