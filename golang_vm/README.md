@@ -7,7 +7,7 @@ The typical workflow involves the following steps:
 2. **Host-Side Interpretation:** The host-side virtual machine interprets the host code, orchestrating interactions with the device-side cycle-level simulator.
 3. **Simulation and Results:** The simulator executes the device-side binary and provides detailed cycle-level simulation results.
 
-We are actively exploring additional usage modes and features to enhance uPIMulator's flexibility and capabilities.
+We are actively exploring new usage modes and features to enhance uPIMulator's flexibility.
 
 ## Prerequisites
 - Go Compiler: uPIMulator requires Go version 1.21.5 or higher.
