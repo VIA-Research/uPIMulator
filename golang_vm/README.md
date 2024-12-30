@@ -18,7 +18,7 @@ You can download and install Go from the [official website](https://go.dev/doc/i
     - Docker Group Membership: Your Ubuntu user account needs to be a member of the docker group.
 
 - Tested Environment: uPIMulator has been thoroughly tested on Ubuntu 18.04 with an Intel CPU. 
-While we strive for compatibility across different environments, optimal performance and functionality are guaranteed within the tested setup.
+While we strive for compatibility across different environments, optimal performance and functionality are ensured within the tested setup.
 
 Please let us know if you encounter any issues in other environments. 
 We appreciate your feedback as we continue to improve and expand uPIMulator's compatibility.
