@@ -13,7 +13,7 @@ We are actively working on expanding uPIMulator's capabilities and may introduce
 ## Installation & Build
 ### Prerequisites
 
-- **Go Compiler and SDK:**  uPIMulator requires Go version 1.21.5 or higher. 
+- **Go Compiler and SDK:**  uPIMulator requires Go 1.21.5 or later. 
 You can download and install Go from the [official website](https://go.dev/doc/install).
 
 - **Docker:** Please ensure that Docker is installed on your system.
