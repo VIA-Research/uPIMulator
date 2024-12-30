@@ -1,4 +1,4 @@
-# ⚙️ Install & Build
+# ⚙️ Install and Build
 ## Usage Mode
 uPIMulator currently operates in an execution-driven mode.
 The typical workflow involves the following steps:
