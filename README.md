@@ -52,7 +52,7 @@ We generally recommend this version for most use cases. See the [README](./golan
 
 ## The Go & Virtual Machine Version
 This latest version extends the Go version with virtual machine capabilities, eliminating the need for manual data preparation code in many scenarios.
-It's particularly suitable for complex or dynamic benchmarks where manual data preparation is challenging, though it may not offer the fastest simuation speed.
+It's particularly suitable for complex or dynamic benchmarks where manual data preparation is challenging, though it may not offer the fastest simulation speed.
 Refer to the [README](./golang_vm/README.md) for further guidance.
 
 # 🔍 Validation Against the Real UPMEM-PIM Hardware
