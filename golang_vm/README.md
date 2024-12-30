@@ -31,7 +31,7 @@ python3 build.py
 ```
 
 ### Verification
-Upon successful installation and build, you should find the uPIMulator executable located in the `/path/to/uPIMulator/build` directory.
+Upon successfully installing and building, the uPIMulator executable will be located in the `/path/to/uPIMulator/build` directory.
 
 Please ensure that you replace `/path/to/uPIMulator` with the actual path where you cloned or downloaded the uPIMulator repository.
 
