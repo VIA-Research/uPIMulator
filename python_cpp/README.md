@@ -275,4 +275,4 @@ These serve as excellent references for structuring your custom data preparation
 
 By following these guidelines, you can seamlessly integrate your benchmarks into uPIMulator for comprehensive performance evaluation and analysis. 
 
-If you have any questions or encounter any difficulties during the integration process, don't hesitate to reach out to us for support. 
+If you have any questions or encounter any difficulties during the integration process, contact us with any questions or difficulties.
