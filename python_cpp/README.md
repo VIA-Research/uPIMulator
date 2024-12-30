@@ -43,7 +43,7 @@ Certainly, here's the paragraph revised for a more professional and appropriate 
 
 ## Binary Files Generation
 We will use the VA (vector addition) benchmark as an example to demonstrate the binary file generation phase.
-Upon successful completion of the compile/assemble/link process, you will find the generated binary files within the `uPIMulator_frontend/bin` directory.
+After compiling, assembling, and linking, you will find the generated binary files within the `uPIMulator_frontend/bin` directory.
 
 > **Pre-Generated Binaries:** To expedite the setup process, you can utilize our pre-generated binary files available at the following [link](https://drive.google.com/file/d/1kfL-xGn1F18Ezmw81IvAhxEaLiZZOLFR/view?usp=sharing).
 
