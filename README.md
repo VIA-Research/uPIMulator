@@ -42,7 +42,7 @@ The currently available versions are:
 All source code and version history can be accessed in our GitHub repository.
 
 ## The Python & C++ Version
-This was our initial implementation of uPIMulator, used in our HPCA-2024 publication. 
+This is our initial implementation of uPIMulator, used in our HPCA-2024 publication. 
 You'll find it in the `python_cpp` directory.  Refer to the included [README](./python_cpp/README.md) for usage instructions.
 
 ## The Go Version
