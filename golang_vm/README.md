@@ -166,8 +166,8 @@ Ensure that these new entries are incorporated into the `Dump` function within t
 | Logic[X_Y_Z]_num_instructions | Number of instructions executed by the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | CycleRule[X_Y_Z]_cycle_rule | Total number of DPU logic cycles resolving register file conflicts for all threads in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | MemoryController[X_Y_Z]_memory_cycle | Number of MRAM memory cycles ticked in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
-| MemoryScheduler[X_Y_Z]_num_fr | Number of reordered memroy commands thanks to FR-FCFS memory scheduling policy in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
-| MemoryScheduler[X_Y_Z]_num_fcfs | Number of non-reordered memroy commands in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
+| MemoryScheduler[X_Y_Z]_num_fr | Number of reordered memory commands thanks to FR-FCFS memory scheduling policy in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
+| MemoryScheduler[X_Y_Z]_num_fcfs | Number of non-reordered memory commands in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | RowBuffer[X_Y_Z]_num_activations | Number of ACTIVATION memory commands received by the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | RowBuffer[X_Y_Z]_num_precharges | Number of PRECHARGE memory commands received by the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | RowBuffer[X_Y_Z]_num_reads | Number of READ memory commands received by the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
@@ -175,8 +175,8 @@ Ensure that these new entries are incorporated into the `Dump` function within t
 | RowBuffer[X_Y_Z]_read_bytes | Total number of bytes read by the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | RowBuffer[X_Y_Z]_write_bytes | Total number of bytes written by the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | VmBank[X_Y_Z]_vm_memory_cycle | Number of host-side conventional DRAM memory cycles ticked by the DRAM bank with channel ID of X, rank ID of Y, and bank ID of Z |
-| MemoryScheduler_num_fr | Number of reordered memroy commands thanks to FR-FCFS memory scheduling policy in the host-attached memory controller in the virtual machine |
-| MemoryScheduler_num_fcfs | Number of non-reordered memroy commands in the host-attached memory controller in the virtual machine |
+| MemoryScheduler_num_fr | Number of reordered memory commands thanks to FR-FCFS memory scheduling policy in the host-attached memory controller in the virtual machine |
+| MemoryScheduler_num_fcfs | Number of non-reordered memory commands in the host-attached memory controller in the virtual machine |
 | VmRowBuffer[X_Y_Z]_num_activations | Number of ACTIVATION memory commands received by the virtual machine's DRAM bank with channel ID of X, rank ID of Y, and bank ID of Z |
 | VmRowBuffer[X_Y_Z]_num_precharges | Number of PRECHARGE memory commands received by the virtual machine's DRAM bank with channel ID of X, rank ID of Y, and bank ID of Z |
 | VmRowBuffer[X_Y_Z]_num_reads | Number of READ memory commands received by the virtual machine's DRAM bank with channel ID of X, rank ID of Y, and bank ID of Z |
