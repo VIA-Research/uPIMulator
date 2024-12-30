@@ -293,7 +293,7 @@ We are committed to ongoing development and improvement of the interpreter and v
 | PUSH_LONG | Push a long type or long type pointer object onto the stack | Value |  |  |  |
 | PUSH_STRING | Push a string type or string type pointer object onto the stack |  |  | Characters |  |
 | POP | Pop an object from the stack |  |  |  |  |
-| BEGIN_STRUCT | Start registering a custom data structeure (i.e., C struct), aka skeleton, to the virtual machine's registry |  |  | struct type name |  |
+| BEGIN_STRUCT | Start registering a custom data structure (i.e., C struct), aka skeleton, to the virtual machine's registry |  |  | struct type name |  |
 | APPEND_VOID | Append a void type or void type pointer field to the recently registered skeleton | Number of stars (i.e., *) |  | Field name |  |
 | APPEND_CHAR | Append a char type or char type pointer field to the recently registered skeleton | Number of stars (i.e., *) |  | Field name |  |
 | APPEND_SHORT | Append a short type or short type pointer field to the recently registered skeleton | Number of stars (i.e., *) |  | Field name |  |
