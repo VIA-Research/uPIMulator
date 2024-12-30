@@ -33,7 +33,7 @@ While we strive for compatibility across different environments, optimal perform
    python build.py
    ```
 
-## Binary Files Generation & Cycle-level Simulation
+## Binary Files Generation & Cycle-Level Simulation
 We will use the VA (vector addition) benchmark as an example to demonstrate the binary file generation and simulation process.
 Please note that the initial simulation might take approximately 30 minutes.
 
