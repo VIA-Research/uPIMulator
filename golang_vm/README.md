@@ -342,7 +342,7 @@ We are committed to ongoing development and improvement of the interpreter and v
 | ASSERT | Assert if the top of stack item is zero |  |  |  |  |
 | ADD | Add two stack items on the top and push the result on the stack |  |  |  |  |
 | SUB | Subtract two stack items on the top and push the result on the stack |  |  |  |  |
-| MUL | Multiplicate two stack items on the top and push the result on the stack |  |  |  |  |
+| MUL | Multiply two stack items on the top and push the result on the stack |  |  |  |  |
 | DIV | Divide two stack items on the top and push the result on the stack |  |  |  |  |
 | MOD | Conduct a modular operation for two stack items on the top and push the result on the stack |  |  |  |  |
 | LSHIFT | Conduct a shift-to-the-left operation for two stack items on the top and push the result on the stack |  |  |  |  |
