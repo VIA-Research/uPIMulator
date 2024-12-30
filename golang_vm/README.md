@@ -157,11 +157,11 @@ Ensure that these new entries are incorporated into the `Dump` function within t
 
 | Logs | Meaning |
 | --- | --- |
-| ThreadScheduler[X_Y_Z]_breakdown_etc | Number of DPU locic cycles of the DPU not being able to issue an instruction due to revolver pipeline in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
-| ThreadScheduler[X_Y_Z]_breakdown_run | Number of DPU locic cycles of the DPU being able to issue an instruction in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
-| ThreadScheduler[X_Y_Z]_breakdown_dma | Number of DPU locic cycles of the DPU not being able to issue an instruction due to data is not ready from MRAM in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
-| Logic[X_Y_Z]_backpressure | Number of DPU locic cycles of the DPU not being able to issue an instruction due to register file conflicts in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
-| Logic[X_Y_Z]_active_tasklets_N | Number of DPU locic cycles when number of N tasklets are active in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
+| ThreadScheduler[X_Y_Z]_breakdown_etc | Number of DPU logic cycles of the DPU not being able to issue an instruction due to revolver pipeline in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
+| ThreadScheduler[X_Y_Z]_breakdown_run | Number of DPU logic cycles of the DPU being able to issue an instruction in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
+| ThreadScheduler[X_Y_Z]_breakdown_dma | Number of DPU logic cycles of the DPU not being able to issue an instruction due to data is not ready from MRAM in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
+| Logic[X_Y_Z]_backpressure | Number of DPU logic cycles of the DPU not being able to issue an instruction due to register file conflicts in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
+| Logic[X_Y_Z]_active_tasklets_N | Number of DPU logic cycles when number of N tasklets are active in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | Logic[X_Y_Z]_logic_cycle | Number of DPU logic cycles elapsed during PIM kernel execution in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | Logic[X_Y_Z]_num_instructions | Number of instructions executed by the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
 | CycleRule[X_Y_Z]_cycle_rule | Total number of DPU logic cycles resolving register file conflicts for all threads in the DPU with channel ID of X, rank ID of Y, and DPU ID of Z |
