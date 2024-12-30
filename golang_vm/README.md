@@ -77,7 +77,7 @@ mkdir bin
 ./build/uPIMulator --root_dirpath /path/to/uPIMulator --bin_dirpath /path/to/uPIMulator/bin --benchmark VA --num_channels 1 --num_ranks_per_channel 1 --num_dpus_per_rank 1 --num_tasklets 16 --data_prep_params 1024
 ```
 
-Feel free to experiment with different benchmarks and configurations to explore uPIMulator's capabilities.
+You can experiment with different benchmarks and configurations to explore uPIMulator's capabilities.
 
 # 🗒️ List of Parameters and Logs
 ## Configuration and Output
