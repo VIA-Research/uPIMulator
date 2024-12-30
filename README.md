@@ -30,7 +30,7 @@ Please feel free to reach out to us if you have any questions or require further
 
 uPIMulator is a cycle-level performance simulator tailored for general-purpose Processing-In-Memory (PIM) systems adhering to the UPMEM Instruction Set Architecture (ISA). This tool provides a detailed simulation environment, empowering computer architecture researchers and PIM program developers to investigate and harness the capabilities of PIM technology.
 
-For comprehensive insights into uPIMulator and its applications, we invite you to refer to our HPCA-2024 publication:
+For comprehensive insights into uPIMulator and its applications, refer to our HPCA-2024 publication:
 
 "[Pathfinding Future PIM Architectures by Demystifying a Commercial PIM Technology](https://www.computer.org/csdl/proceedings-article/hpca/2024/931300a263/1VOAAZSdy0w)", HPCA, 2024
 
