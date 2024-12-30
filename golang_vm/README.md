@@ -61,7 +61,7 @@ You can further customize the simulation by utilizing command-line options to ad
 ### Simulation Output
 Detailed simulation results will be written to `/path/to/bin/log.txt`.
 
-> **Note:** Ensure that you replace `/path/to/bin` with the absolute path to your chosen output directory.
+> **Note:** Be sure to replace `/path/to/bin` with the absolute path to your chosen output directory.
 
 ### Important Notes
 - **Create Output Directory:** Prior to running the simulation, create an empty directory at the specified `bin_dirpath`. 
