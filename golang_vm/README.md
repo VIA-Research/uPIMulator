@@ -20,7 +20,7 @@ You can download and install Go from the [official website](https://go.dev/doc/i
 - Tested Environment: uPIMulator has been thoroughly tested on Ubuntu 18.04 with an Intel CPU. 
 While we strive for compatibility across different environments, optimal performance and functionality are ensured within the tested setup.
 
-Please let us know if you encounter any issues in other environments. 
+If you encounter issues in unsupported environments, please report them via GitHub Issues.
 We appreciate your feedback as we continue to improve and expand uPIMulator's compatibility.
 
 ## Install
