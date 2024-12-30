@@ -64,7 +64,7 @@ Detailed simulation results will be written to `/path/to/bin/log.txt`.
 > **Note:** Be sure to replace `/path/to/bin` with the absolute path to your chosen output directory.
 
 ### Important Notes
-- **Create Output Directory:** Prior to running the simulation, create an empty directory at the specified `bin_dirpath`. 
+- **Create Output Directory:** Prior to running the simulation, manually create an empty directory at the specified `bin_dirpath` before running the simulation. 
 - **Absolute Paths:**  Always provide absolute paths for both `root_dirpath` (the repository's root directory) and `bin_dirpath`.
 
 ```bash
