@@ -41,7 +41,7 @@ If you encounter any difficulties during the installation or build process, or i
 ## Validation with PrIM Benchmark Suite
 uPIMulator's accuracy and functionality have been validated using PrIM, an open-source UPMEM-PIM benchmark suite comprising 16 data-intensive workloads across diverse application domains (linear algebra, graph processing, neural networks, etc.).
 
-Out of these 16 benchmarks, uPIMulator successfully simulates 13 workloads without modifications. The remaining three (BFS, SpMV, NW) presented challenges due to minor bugs or their reliance on undisclosed UPMEM SDK functions, hindering their simulation and debugging within uPIMulator. Consequently, these three benchmarks are currently excluded from the exemplar benchmarks provided in this repository.
+Among the 16 benchmarks, uPIMulator successfully simulates 13 without modifications. The remaining three (BFS, SpMV, NW) presented challenges due to minor bugs or their reliance on undisclosed UPMEM SDK functions, hindering their simulation and debugging within uPIMulator. Consequently, these three benchmarks are currently excluded from the exemplar benchmarks provided in this repository.
 
 We are actively working to address these limitations and expand uPIMulator's compatibility with the full PrIM benchmark suite in future releases.
 
