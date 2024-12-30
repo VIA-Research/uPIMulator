@@ -203,7 +203,7 @@ This is essential as uPIMulator's interpreter and linker automatically detect an
 
 > **Note:** These structural requirements ensure seamless integration with uPIMulator's build and execution processes.
 
-# 🏊 Delving into the Host-side Virtual Machine
+# 🏊 Delving into the Host-Side Virtual Machine
 ## Host-Side Virtual Machine and Interpretable C Grammar
 The host-side virtual machine interprets host-side code written in a subset of C, eliminating the need for manual input/output data preparation.
 
@@ -492,7 +492,7 @@ It consists of two primary simulation domains:
 - **Row Buffer (`RowBuffer` struct):** 
     - Models MRAM bank timing, including activation, read/write latencies, and precharge delays.
 
-# 🎩 Adding Custom Host-side API
+# 🎩 Adding Custom Host-Side API
 ## Extending the Host-Side API
 uPIMulator allows you to introduce custom host-side APIs to the virtual machine, enhancing its functionality and adaptability.
 We'll illustrate this process using the example of adding a `DPU_ASSERT` API, which verifies the success of DPU-related function calls.
