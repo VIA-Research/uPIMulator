@@ -98,8 +98,6 @@ If you are interested in contributing or have questions, please feel free to ope
 
 ## List of Contributors
 
-# 🪨 Materials
-
 # 🙏 Acknowledgement
 We would like to thank the developers of the [PrIM benchmark suite](https://github.com/CMU-SAFARI/prim-benchmarks), which was instrumental in developing this project.
 
