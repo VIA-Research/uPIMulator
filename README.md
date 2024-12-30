@@ -34,7 +34,7 @@ For comprehensive insights into uPIMulator and its applications, we invite you t
 
 "[Pathfinding Future PIM Architectures by Demystifying a Commercial PIM Technology](https://www.computer.org/csdl/proceedings-article/hpca/2024/931300a263/1VOAAZSdy0w)", HPCA, 2024
 
-Currently Available Versions are:
+The currently Available Versions are:
 1. Python & C++ version
 2. Go version
 3. Go & virtual machine version
