@@ -70,7 +70,7 @@ Refer to the [README](./golang_vm/README.md) for further guidance.
 | Single DPU (no inter-DPU communication) | 710 | 98.4% | 12.0% |
 | Multi-DPU (with inter-DPU communication) | 387 | 83.6% | 26.9% |
 
-- The validation results were obtained using the Python & C++ version of uPIMulator.
+- These validation results were obtained using the Python & C++ version of uPIMulator.
 
 # List of Supported Instructions
 - uPIMulator currently supports 599 out of the 970 instructions defined in the [UPMEM-PIM ISA](https://sdk.upmem.com/2023.2.0/201_IS.html#instruction-set-architecture).
