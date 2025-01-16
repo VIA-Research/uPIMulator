@@ -612,7 +612,7 @@ These instructions are compiled into the object file `uPIMulator/sdk/build/sysli
 
 Within this assembly file, you can replace the series of `mul_step` instructions with a single `mul` instruction at the appropriate location (likely Line 22). This modification prepares the assembly code to utilize the new instruction once it is fully supported by the linker and simulator.
 
-```
+```assembly
 __mulsi3:                               // @__mulsi3
 .Lfunc_begin0:
 	.file	1 "/root/uPIMulator/sdk" "syslib/mul32.c"
