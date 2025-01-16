@@ -39,8 +39,6 @@ We aim to expand uPIMulator's capabilities and may introduce additional usage mo
 
 If you encounter any issues during the installation or build process, please refer to the troubleshooting section in the documentation or open an issue on our GitHub repository.
 
-Certainly, here's the paragraph revised for a more professional and appropriate tone suitable for a GitHub README:
-
 ## Binary Files Generation
 We will use the VA (vector addition) benchmark as an example to demonstrate the binary file generation phase.
 After compiling, assembling, and linking, you will find the generated binary files within the `uPIMulator_frontend/bin` directory.
@@ -70,8 +68,6 @@ docker build -t bongjoonhyun/compiler -f /path/to/uPIMulator/python_cpp/uPIMulat
 > **Supported Benchmarks and Performance Note:** uPIMulator currently supports 13 PrIM benchmarks.
 > Please be aware that the initial compile/assemble/link process may take approximately 30 minutes.
 
-Certainly, let's revise the paragraph for a more professional and appropriate tone suitable for a GitHub README:
-
 ## Cycle-level Simulation
 ### Executing a Simulation
 Initiate a cycle-level simulation by providing the following inputs to the `uPIMulator` executable:
@@ -95,8 +91,6 @@ cd /path/to/uPIMulator/uPIMulator_backend/build/
 > **Important Note:** Ensure that you provide the absolute path to the `bindir` when executing the simulation.
 
 Feel free to explore different benchmark configurations and utilize the command-line options to tailor the simulation to your specific requirements.
-
-Certainly, let's revise the paragraph for a more professional and appropriate tone suitable for a GitHub README:
 
 # 📄 Reproducing Figures from the Paper
 This section provides instructions for replicating the figures presented in our paper.
