@@ -152,6 +152,10 @@ func (this *Relocatable) SwitchLabel(label_name string) {
 	this.cur_label = this.Label(label_name)
 }
 
+func (this *Relocatable) CurLabel() *Label {
+	return this.cur_label
+}
+
 func (this *Relocatable) NewBytecode(op_code OpCode, args []int64, strs []string) {
 	bytecode := new(Bytecode)
 	bytecode.Init(op_code, args, strs)

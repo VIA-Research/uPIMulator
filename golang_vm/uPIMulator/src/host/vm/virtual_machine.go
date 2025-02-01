@@ -38,7 +38,7 @@ type VirtualMachine struct {
 
 	arena             *arena.Arena
 	frame_chain       *frame.FrameChain
-	registry          *type_system.Registry
+	type_registry     *type_system.TypeRegistry
 	garbage_collector *arena.GarbageCollector
 
 	cur_skeleton_name *string
@@ -70,14 +70,14 @@ func (this *VirtualMachine) Init(command_line_parser *misc.CommandLineParser) {
 	this.frame_chain = new(frame.FrameChain)
 	this.frame_chain.Init()
 
-	this.registry = new(type_system.Registry)
-	this.registry.Init()
+	this.type_registry = new(type_system.TypeRegistry)
+	this.type_registry.Init()
 
 	this.garbage_collector = new(arena.GarbageCollector)
 	this.garbage_collector.Init()
 	this.garbage_collector.ConnectArena(this.arena)
 	this.garbage_collector.ConnectFrameChain(this.frame_chain)
-	this.garbage_collector.ConnectRegistry(this.registry)
+	this.garbage_collector.ConnectRegistry(this.type_registry)
 
 	this.cur_skeleton_name = nil
 
@@ -514,14 +514,14 @@ func (this *VirtualMachine) BeginStruct(skeleton_name string) {
 	skeleton := new(type_system.Skeleton)
 	skeleton.Init(skeleton_name)
 
-	this.registry.AddSkeleton(skeleton)
+	this.type_registry.AddSkeleton(skeleton)
 
 	this.cur_skeleton_name = new(string)
 	*this.cur_skeleton_name = skeleton_name
 }
 
 func (this *VirtualMachine) AppendVoid(num_stars int64, field_name string) {
-	skeleton := this.registry.Skeleton(*this.cur_skeleton_name)
+	skeleton := this.type_registry.Skeleton(*this.cur_skeleton_name)
 
 	type_variable := new(type_system.TypeVariable)
 	type_variable.InitPrimitive(type_system.VOID, int(num_stars))
@@ -533,7 +533,7 @@ func (this *VirtualMachine) AppendVoid(num_stars int64, field_name string) {
 }
 
 func (this *VirtualMachine) AppendChar(num_stars int64, field_name string) {
-	skeleton := this.registry.Skeleton(*this.cur_skeleton_name)
+	skeleton := this.type_registry.Skeleton(*this.cur_skeleton_name)
 
 	type_variable := new(type_system.TypeVariable)
 	type_variable.InitPrimitive(type_system.CHAR, int(num_stars))
@@ -545,7 +545,7 @@ func (this *VirtualMachine) AppendChar(num_stars int64, field_name string) {
 }
 
 func (this *VirtualMachine) AppendShort(num_stars int64, field_name string) {
-	skeleton := this.registry.Skeleton(*this.cur_skeleton_name)
+	skeleton := this.type_registry.Skeleton(*this.cur_skeleton_name)
 
 	type_variable := new(type_system.TypeVariable)
 	type_variable.InitPrimitive(type_system.SHORT, int(num_stars))
@@ -557,7 +557,7 @@ func (this *VirtualMachine) AppendShort(num_stars int64, field_name string) {
 }
 
 func (this *VirtualMachine) AppendInt(num_stars int64, field_name string) {
-	skeleton := this.registry.Skeleton(*this.cur_skeleton_name)
+	skeleton := this.type_registry.Skeleton(*this.cur_skeleton_name)
 
 	type_variable := new(type_system.TypeVariable)
 	type_variable.InitPrimitive(type_system.INT, int(num_stars))
@@ -569,7 +569,7 @@ func (this *VirtualMachine) AppendInt(num_stars int64, field_name string) {
 }
 
 func (this *VirtualMachine) AppendLong(num_stars int64, field_name string) {
-	skeleton := this.registry.Skeleton(*this.cur_skeleton_name)
+	skeleton := this.type_registry.Skeleton(*this.cur_skeleton_name)
 
 	type_variable := new(type_system.TypeVariable)
 	type_variable.InitPrimitive(type_system.LONG, int(num_stars))
@@ -581,7 +581,7 @@ func (this *VirtualMachine) AppendLong(num_stars int64, field_name string) {
 }
 
 func (this *VirtualMachine) AppendStruct(num_stars int64, struct_name string, field_name string) {
-	skeleton := this.registry.Skeleton(*this.cur_skeleton_name)
+	skeleton := this.type_registry.Skeleton(*this.cur_skeleton_name)
 
 	type_variable := new(type_system.TypeVariable)
 	type_variable.InitStruct(type_system.STRUCT, struct_name, int(num_stars))
@@ -781,7 +781,7 @@ func (this *VirtualMachine) NewFastStruct(num_stars int64, struct_name string, s
 	if num_stars > 0 {
 		object = this.arena.NewInt(0)
 	} else {
-		object = this.arena.NewStruct(struct_name, this.registry.SkeletonSize(struct_name))
+		object = this.arena.NewStruct(struct_name, this.type_registry.SkeletonSize(struct_name))
 	}
 
 	type_variable := new(type_system.TypeVariable)
@@ -891,7 +891,7 @@ func (this *VirtualMachine) NewArgStruct(num_stars int64, struct_name string, sy
 	if num_stars > 0 {
 		object = this.arena.NewInt(0)
 	} else {
-		object = this.arena.NewStruct(struct_name, this.registry.SkeletonSize(struct_name))
+		object = this.arena.NewStruct(struct_name, this.type_registry.SkeletonSize(struct_name))
 	}
 
 	type_variable := new(type_system.TypeVariable)
@@ -986,7 +986,7 @@ func (this *VirtualMachine) NewReturnStruct(num_stars int64, struct_name string)
 	if num_stars > 0 {
 		object = this.arena.NewInt(0)
 	} else {
-		object = this.arena.NewStruct(struct_name, this.registry.SkeletonSize(struct_name))
+		object = this.arena.NewStruct(struct_name, this.type_registry.SkeletonSize(struct_name))
 	}
 
 	type_variable := new(type_system.TypeVariable)
@@ -1092,7 +1092,7 @@ func (this *VirtualMachine) SizeofLong(num_stars int64) {
 func (this *VirtualMachine) SizeofStruct(num_stars int64, struct_name string) {
 	var value int64
 	if num_stars == 0 {
-		value = this.registry.SkeletonSize(struct_name)
+		value = this.type_registry.SkeletonSize(struct_name)
 	} else {
 		value = 4
 	}
@@ -1192,9 +1192,9 @@ func (this *VirtualMachine) GetSubscript() {
 		} else if base_.TypeVariable().TypeVariableType() == type_system.STRUCT {
 			struct_name := base_.TypeVariable().StructName()
 
-			offset = index_value * this.registry.SkeletonSize(struct_name)
+			offset = index_value * this.type_registry.SkeletonSize(struct_name)
 
-			size = this.registry.SkeletonSize(struct_name)
+			size = this.type_registry.SkeletonSize(struct_name)
 
 			type_variable.InitStruct(type_system.STRUCT, struct_name, base_.TypeVariable().NumStars()-1)
 		} else {
@@ -1246,9 +1246,9 @@ func (this *VirtualMachine) GetAccess(field_name string) {
 
 	struct_name := base_.TypeVariable().StructName()
 
-	offset := this.registry.FieldOffset(struct_name, field_name)
+	offset := this.type_registry.FieldOffset(struct_name, field_name)
 
-	field := this.registry.Skeleton(struct_name).Field(field_name)
+	field := this.type_registry.Skeleton(struct_name).Field(field_name)
 
 	type_variable := field.TypeVariable()
 
@@ -1284,7 +1284,7 @@ func (this *VirtualMachine) GetAccess(field_name string) {
 		if field.TypeVariable().NumStars() > 0 {
 			size = 4
 		} else {
-			size = this.registry.SkeletonSize(base_.TypeVariable().StructName())
+			size = this.type_registry.SkeletonSize(base_.TypeVariable().StructName())
 		}
 	} else {
 		err := errors.New("type variable type is not valid")
@@ -1314,9 +1314,9 @@ func (this *VirtualMachine) GetReference(field_name string) {
 
 	struct_name := base_.TypeVariable().StructName()
 
-	offset := this.registry.FieldOffset(struct_name, field_name)
+	offset := this.type_registry.FieldOffset(struct_name, field_name)
 
-	field := this.registry.Skeleton(struct_name).Field(field_name)
+	field := this.type_registry.Skeleton(struct_name).Field(field_name)
 
 	type_variable := field.TypeVariable()
 
@@ -1352,7 +1352,7 @@ func (this *VirtualMachine) GetReference(field_name string) {
 		if field.TypeVariable().NumStars() > 0 {
 			size = 4
 		} else {
-			size = this.registry.SkeletonSize(base_.TypeVariable().StructName())
+			size = this.type_registry.SkeletonSize(base_.TypeVariable().StructName())
 		}
 	} else {
 		err := errors.New("type variable type is not valid")
@@ -3469,8 +3469,6 @@ func (this *VirtualMachine) DpuTransfer() {
 			delete(this.prepare_xfer_buf, dpu_)
 
 			if direction_value == 0 {
-				this.Checkpoint()
-
 				if base_.TypeVariable().TypeVariableType() == type_system.STRING {
 					base_string := this.DecodeString(
 						this.arena.Pool().Memory().Read(base_.Address(), base_.Size()),
@@ -3484,21 +3482,15 @@ func (this *VirtualMachine) DpuTransfer() {
 						panic(err)
 					}
 
-					byte_stream := this.PrepareByteStream(pointer_value, offset_value, size_value)
+					byte_stream := this.PrepareByteStream(pointer_value, size_value)
 					dpu_.Dma().
 						TransferToWram(wram_address+offset_value, byte_stream.Size(), byte_stream)
 				} else {
 					base_value := this.arena.Pool().Memory().Read(base_.Address(), base_.Size()).SignedValue()
 
-					channel_id := dpu_.ChannelId()
-					rank_id := dpu_.RankId()
-					dpu_id := dpu_.DpuId()
+					byte_stream := this.PrepareByteStream(pointer_value, size_value)
 
-					transfer_command := new(bank.TransferCommand)
-					transfer_command.Init(bank.HOST_TO_DEVICE, pointer_value, channel_id, rank_id, dpu_id, base_value+offset_value, size_value)
-
-					this.memory_controller.Push(transfer_command)
-					this.push_xfer[transfer_command] = true
+					dpu_.Dma().TransferToMram(base_value+offset_value, size_value, byte_stream)
 				}
 			} else if direction_value == 1 {
 				if base_.TypeVariable().TypeVariableType() == type_system.STRING {
@@ -3517,15 +3509,8 @@ func (this *VirtualMachine) DpuTransfer() {
 				} else {
 					base_value := this.arena.Pool().Memory().Read(base_.Address(), base_.Size()).SignedValue()
 
-					channel_id := dpu_.ChannelId()
-					rank_id := dpu_.RankId()
-					dpu_id := dpu_.DpuId()
-
-					transfer_command := new(bank.TransferCommand)
-					transfer_command.Init(bank.DEVICE_TO_HOST, pointer_value, channel_id, rank_id, dpu_id, base_value+offset_value, size_value)
-
-					this.memory_controller.Push(transfer_command)
-					this.push_xfer[transfer_command] = true
+					byte_stream := dpu_.Dma().TransferFromMram(base_value+offset_value, size_value)
+					this.arena.Pool().Memory().Write(pointer_value, size_value, byte_stream)
 				}
 			} else {
 				err := errors.New("direction value is not 0 nor 1")
@@ -3533,8 +3518,6 @@ func (this *VirtualMachine) DpuTransfer() {
 			}
 		}
 	}
-
-	this.SimulateMemory()
 
 	this.frame_chain.LastFrame().Stack().Pop()
 	this.frame_chain.LastFrame().Stack().Pop()
@@ -3559,8 +3542,6 @@ func (this *VirtualMachine) DpuCopyTo() {
 		SignedValue()
 	size_value := this.arena.Pool().Memory().Read(size.Address(), size.Size()).SignedValue()
 
-	this.Checkpoint()
-
 	if base_.TypeVariable().TypeVariableType() == type_system.STRING {
 		base_string := this.DecodeString(
 			this.arena.Pool().Memory().Read(base_.Address(), base_.Size()),
@@ -3574,7 +3555,7 @@ func (this *VirtualMachine) DpuCopyTo() {
 			panic(err)
 		}
 
-		byte_stream := this.PrepareByteStream(pointer_value, offset_value, size_value)
+		byte_stream := this.PrepareByteStream(pointer_value, size_value)
 		this.Dpus()[dpu_value].Dma().
 			TransferToWram(wram_address+offset_value, byte_stream.Size(), byte_stream)
 	} else {
@@ -3584,14 +3565,12 @@ func (this *VirtualMachine) DpuCopyTo() {
 		rank_id := (int(dpu_value) % (this.num_ranks_per_channel * this.num_dpus_per_rank)) / this.num_dpus_per_rank
 		dpu_id := int(dpu_value) % this.num_dpus_per_rank
 
-		transfer_command := new(bank.TransferCommand)
-		transfer_command.Init(bank.HOST_TO_DEVICE, pointer_value, channel_id, rank_id, dpu_id, base_value+offset_value, size_value)
+		simulated_dpu := this.channels[channel_id].Ranks()[rank_id].Dpus()[dpu_id]
 
-		this.memory_controller.Push(transfer_command)
-		this.push_xfer[transfer_command] = true
+		byte_stream := this.PrepareByteStream(pointer_value, size_value)
+
+		simulated_dpu.Dma().TransferToMram(base_value+offset_value, size_value, byte_stream)
 	}
-
-	this.SimulateMemory()
 
 	this.frame_chain.LastFrame().Stack().Pop()
 	this.frame_chain.LastFrame().Stack().Pop()
@@ -3638,22 +3617,11 @@ func (this *VirtualMachine) DpuCopyFrom() {
 		rank_id := (int(dpu_value) % (this.num_ranks_per_channel * this.num_dpus_per_rank)) / this.num_dpus_per_rank
 		dpu_id := int(dpu_value) % this.num_dpus_per_rank
 
-		transfer_command := new(bank.TransferCommand)
-		transfer_command.Init(
-			bank.DEVICE_TO_HOST,
-			pointer_value,
-			channel_id,
-			rank_id,
-			dpu_id,
-			base_value+offset_value,
-			size_value,
-		)
+		simulated_dpu := this.channels[channel_id].Ranks()[rank_id].Dpus()[dpu_id]
 
-		this.memory_controller.Push(transfer_command)
-		this.push_xfer[transfer_command] = true
+		byte_stream := simulated_dpu.Dma().TransferFromMram(base_value+offset_value, size_value)
+		this.arena.Pool().Memory().Write(pointer_value, size_value, byte_stream)
 	}
-
-	this.SimulateMemory()
 
 	this.frame_chain.LastFrame().Stack().Pop()
 	this.frame_chain.LastFrame().Stack().Pop()
@@ -3834,16 +3802,15 @@ func (this *VirtualMachine) Checkpoint() {
 
 func (this *VirtualMachine) PrepareByteStream(
 	pointer int64,
-	offset int64,
 	size int64,
 ) *encoding.ByteStream {
-	object := this.arena.Pool().Memory().Read(pointer+offset, size)
+	object := this.arena.Pool().Memory().Read(pointer, size)
 
 	byte_stream := new(encoding.ByteStream)
 	byte_stream.Init()
 
 	for i := int64(0); i < size; i++ {
-		byte_stream.Append(object.Get(int(offset + i)))
+		byte_stream.Append(object.Get(int(i)))
 	}
 
 	return byte_stream

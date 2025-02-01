@@ -24,6 +24,9 @@ type Codegen struct {
 	type_system *type_system.TypeSystem
 
 	relocatable *abi.Relocatable
+
+	cur_block_depth int
+	block_depths    map[string]int
 }
 
 func (this *Codegen) Init(
@@ -44,6 +47,9 @@ func (this *Codegen) Init(
 
 	this.relocatable = new(abi.Relocatable)
 	this.relocatable.Init()
+
+	this.cur_block_depth = 0
+	this.block_depths = make(map[string]int)
 }
 
 func (this *Codegen) Codegen(ast *parser.Ast) *abi.Relocatable {
@@ -302,6 +308,8 @@ func (this *Codegen) CodegenFuncDecl(func_decl *decl.FuncDecl) {
 }
 
 func (this *Codegen) CodegenFuncDef(func_def *decl.FuncDef) {
+	this.cur_block_depth = 0
+
 	type_specifier_ := func_def.TypeSpecifier()
 
 	func_name := func_def.Identifier().Attribute()
@@ -507,6 +515,8 @@ func (this *Codegen) CodegenForStmt(for_stmt *stmt.ForStmt) {
 	condition_label, body_label, end_label := this.relocatable.NewLoop()
 
 	this.relocatable.NewBytecode(abi.NEW_SCOPE, []int64{}, []string{})
+	this.block_depths[condition_label.Name()] = this.cur_block_depth
+	this.cur_block_depth++
 	this.CodegenStmt(for_stmt.Initialization())
 	this.relocatable.NewBytecode(abi.JUMP, []int64{}, []string{condition_label.Name()})
 
@@ -523,6 +533,7 @@ func (this *Codegen) CodegenForStmt(for_stmt *stmt.ForStmt) {
 
 	this.relocatable.SwitchLabel(end_label.Name())
 	this.relocatable.NewBytecode(abi.DELETE_SCOPE, []int64{}, []string{})
+	this.cur_block_depth--
 }
 
 func (this *Codegen) CodegenDpuForeachStmt(dpu_foreach_stmt *stmt.DpuForeachStmt) {
@@ -547,6 +558,7 @@ func (this *Codegen) CodegenDpuForeachStmt(dpu_foreach_stmt *stmt.DpuForeachStmt
 	i_symbol_name := dpu_foreach_stmt.Foreach().Get(2).PrimaryExpr().Token().Attribute()
 
 	this.relocatable.NewBytecode(abi.NEW_SCOPE, []int64{}, []string{})
+
 	this.relocatable.NewBytecode(abi.NEW_FAST_INT, []int64{0}, []string{dpu_symbol_name})
 	this.relocatable.NewBytecode(abi.NEW_FAST_INT, []int64{0}, []string{i_symbol_name})
 
@@ -584,6 +596,12 @@ func (this *Codegen) CodegenWhileStmt(while_stmt *stmt.WhileStmt) {
 }
 
 func (this *Codegen) CodegenContinueStmt(continue_stmt *stmt.ContinueStmt) {
+	loop_depth := this.block_depths[this.relocatable.CurLoopCondition().Name()]
+	for i := 0; i < this.cur_block_depth-loop_depth-1; i++ {
+		this.relocatable.NewBytecode(abi.DELETE_SCOPE, []int64{}, []string{})
+	}
+	this.cur_block_depth = loop_depth
+
 	this.relocatable.NewBytecode(
 		abi.JUMP,
 		[]int64{},
@@ -592,6 +610,12 @@ func (this *Codegen) CodegenContinueStmt(continue_stmt *stmt.ContinueStmt) {
 }
 
 func (this *Codegen) CodegenBreakStmt(break_stmt *stmt.BreakStmt) {
+	loop_depth := this.block_depths[this.relocatable.CurLoopCondition().Name()]
+	for i := 0; i < this.cur_block_depth-loop_depth-1; i++ {
+		this.relocatable.NewBytecode(abi.DELETE_SCOPE, []int64{}, []string{})
+	}
+	this.cur_block_depth = loop_depth
+
 	this.relocatable.NewBytecode(
 		abi.JUMP,
 		[]int64{},
@@ -696,6 +720,8 @@ func (this *Codegen) CodegenExprStmt(expr_stmt *stmt.ExprStmt) {
 
 func (this *Codegen) CodegenBlockStmt(block_stmt *stmt.BlockStmt) {
 	this.relocatable.NewBytecode(abi.NEW_SCOPE, []int64{}, []string{})
+	this.block_depths[this.relocatable.CurLabel().Name()] = this.cur_block_depth
+	this.cur_block_depth++
 
 	for i := 0; i < block_stmt.Length(); i++ {
 		stmt_ := block_stmt.Get(i)
@@ -703,6 +729,7 @@ func (this *Codegen) CodegenBlockStmt(block_stmt *stmt.BlockStmt) {
 	}
 
 	this.relocatable.NewBytecode(abi.DELETE_SCOPE, []int64{}, []string{})
+	this.cur_block_depth--
 }
 
 func (this *Codegen) CodegenExpr(expr_ *expr.Expr) {

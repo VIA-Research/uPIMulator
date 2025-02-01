@@ -5,20 +5,20 @@ import (
 	"fmt"
 )
 
-type Registry struct {
+type TypeRegistry struct {
 	skeletons map[string]*Skeleton
 }
 
-func (this *Registry) Init() {
+func (this *TypeRegistry) Init() {
 	this.skeletons = make(map[string]*Skeleton)
 }
 
-func (this *Registry) HasSkeleton(skeleton_name string) bool {
+func (this *TypeRegistry) HasSkeleton(skeleton_name string) bool {
 	_, found := this.skeletons[skeleton_name]
 	return found
 }
 
-func (this *Registry) Skeleton(skeleton_name string) *Skeleton {
+func (this *TypeRegistry) Skeleton(skeleton_name string) *Skeleton {
 	if !this.HasSkeleton(skeleton_name) {
 		err_msg := fmt.Sprintf("skeleton (%s) is not found", skeleton_name)
 		err := errors.New(err_msg)
@@ -28,7 +28,7 @@ func (this *Registry) Skeleton(skeleton_name string) *Skeleton {
 	return this.skeletons[skeleton_name]
 }
 
-func (this *Registry) AddSkeleton(skeleton *Skeleton) {
+func (this *TypeRegistry) AddSkeleton(skeleton *Skeleton) {
 	if this.HasSkeleton(skeleton.Name()) {
 		err_msg := fmt.Sprintf("skeleton (%s) already exists", skeleton.Name())
 		err := errors.New(err_msg)
@@ -38,7 +38,7 @@ func (this *Registry) AddSkeleton(skeleton *Skeleton) {
 	this.skeletons[skeleton.Name()] = skeleton
 }
 
-func (this *Registry) SkeletonSize(skeleton_name string) int64 {
+func (this *TypeRegistry) SkeletonSize(skeleton_name string) int64 {
 	if !this.HasSkeleton(skeleton_name) {
 		err_msg := fmt.Sprintf("skeleton (%s) is not found", skeleton_name)
 		err := errors.New(err_msg)
@@ -73,7 +73,7 @@ func (this *Registry) SkeletonSize(skeleton_name string) int64 {
 	return offset
 }
 
-func (this *Registry) FieldOffset(skeleton_name string, field_name string) int64 {
+func (this *TypeRegistry) FieldOffset(skeleton_name string, field_name string) int64 {
 	if !this.HasSkeleton(skeleton_name) {
 		err_msg := fmt.Sprintf("skeleton (%s) is not found", skeleton_name)
 		err := errors.New(err_msg)
@@ -115,7 +115,7 @@ func (this *Registry) FieldOffset(skeleton_name string, field_name string) int64
 	return offset
 }
 
-func (this *Registry) FieldSize(skeleton_name string, field_name string) int64 {
+func (this *TypeRegistry) FieldSize(skeleton_name string, field_name string) int64 {
 	if !this.HasSkeleton(skeleton_name) {
 		err_msg := fmt.Sprintf("skeleton (%s) is not found", skeleton_name)
 		err := errors.New(err_msg)

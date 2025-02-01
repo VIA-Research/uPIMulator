@@ -15,7 +15,7 @@ type GarbageCollector struct {
 
 	arena       *Arena
 	frame_chain *frame.FrameChain
-	registry    *type_system.Registry
+	registry    *type_system.TypeRegistry
 }
 
 func (this *GarbageCollector) Init() {
@@ -34,7 +34,7 @@ func (this *GarbageCollector) ConnectFrameChain(frame_chain *frame.FrameChain) {
 	this.frame_chain = frame_chain
 }
 
-func (this *GarbageCollector) ConnectRegistry(registry *type_system.Registry) {
+func (this *GarbageCollector) ConnectRegistry(registry *type_system.TypeRegistry) {
 	this.registry = registry
 }
 
@@ -154,7 +154,7 @@ func (this *GarbageCollector) ChaseObject(object *base.Object) []*base.Object {
 						value := this.arena.Pool().Memory().Read(object.Address(), 4).SignedValue()
 						objects = append(objects, this.ChasePointer(value)...)
 					} else {
-						objects = append(objects, this.arena.Pool().LastObject(object.Address()))
+						objects = append(objects, this.arena.Pool().Object(object.Address()))
 					}
 				} else {
 					field_offset := this.registry.FieldOffset(skeleton.Name(), field.Name())
