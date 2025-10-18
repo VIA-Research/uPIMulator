@@ -133,7 +133,7 @@ func (this *Alu) Subc(operand1 int64, operand2 int64, carry_flag bool) (int64, b
 	var result int64
 	var carry bool
 	if carry_flag {
-		if word1.Value(word.UNSIGNED)+1 >= word2.Value(word.UNSIGNED) {
+		if word1.Value(word.UNSIGNED) > word2.Value(word.UNSIGNED) {
 			result = word1.Value(word.UNSIGNED) - word2.Value(word.UNSIGNED) - 1
 			carry = false
 		} else {

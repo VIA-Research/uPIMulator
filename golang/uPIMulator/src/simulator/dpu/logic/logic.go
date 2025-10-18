@@ -5613,19 +5613,19 @@ func (this *Logic) SetSubNzCc(
 	word2.Init(mram_data_width)
 	word2.SetValue(operand2)
 
-	if word1.Value(word.UNSIGNED) < word2.Value(word.UNSIGNED) {
+	if carry {
 		thread.RegFile().SetCondition(cc.LTU)
 	}
 
-	if word1.Value(word.UNSIGNED) <= word2.Value(word.UNSIGNED) {
+	if carry || result == 0 {
 		thread.RegFile().SetCondition(cc.LEU)
 	}
 
-	if word1.Value(word.UNSIGNED) > word2.Value(word.UNSIGNED) {
+	if !carry {
 		thread.RegFile().SetCondition(cc.GTU)
 	}
 
-	if word1.Value(word.UNSIGNED) >= word2.Value(word.UNSIGNED) {
+	if !carry && result != 0 {
 		thread.RegFile().SetCondition(cc.GEU)
 	}
 

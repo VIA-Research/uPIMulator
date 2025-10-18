@@ -1,8 +1,8 @@
 package compiler
 
 import (
+	"fmt"
 	"os/exec"
-	"path/filepath"
 	"strconv"
 	"uPIMulator/src/misc"
 )
@@ -34,9 +34,9 @@ func (this *Compiler) Init(command_line_parser *misc.CommandLineParser) {
 }
 
 func (this *Compiler) Build() {
-	docker_dirpath := filepath.Join(this.root_dirpath, "docker")
+	// docker_dirpath := filepath.Join(this.root_dirpath, "docker")
 
-	command := exec.Command("docker", "build", "-t", "bongjoonhyun/upimulator", docker_dirpath)
+	command := exec.Command("docker", "pull", "patricklidockerhub/upimulator")
 
 	err := command.Run()
 
@@ -58,7 +58,7 @@ func (this *Compiler) CompileBenchmark() {
 		"--rm",
 		"-v",
 		this.root_dirpath+":/root/uPIMulator",
-		"bongjoonhyun/upimulator",
+		"patricklidockerhub/upimulator",
 		"python3",
 		"/root/uPIMulator/benchmark/build.py",
 		"--num_dpus",
@@ -67,11 +67,12 @@ func (this *Compiler) CompileBenchmark() {
 		strconv.Itoa(this.num_tasklets),
 	)
 
-	err := command.Run()
+	out, err := command.Output()
 
 	if err != nil {
 		panic(err)
 	}
+	fmt.Printf("Command output:\n%s", out)
 }
 
 func (this *Compiler) CompileSdk() {
@@ -82,7 +83,7 @@ func (this *Compiler) CompileSdk() {
 		"--rm",
 		"-v",
 		this.root_dirpath+":/root/uPIMulator",
-		"bongjoonhyun/upimulator",
+		"patricklidockerhub/upimulator",
 		"python3",
 		"/root/uPIMulator/sdk/build.py",
 		"--num_tasklets",
