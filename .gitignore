@@ -37,3 +37,12 @@ __pycache__/
 *.exe
 *.out
 *.app
+
+*.pdf
+*.log
+*.aux
+*.toc
+*.gz
+*.zip
+*.tar
+*.7z

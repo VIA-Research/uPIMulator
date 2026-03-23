@@ -31,16 +31,24 @@ func main() {
 		config_validator.Validate()
 
 		bin_dirpath := command_line_parser.StringParameter("bin_dirpath")
+		reuse_bin := command_line_parser.IntParameter("reuse_bin") != 0
 
-		if _, err := os.Stat(bin_dirpath); !os.IsNotExist(err) {
-			remove_err := os.RemoveAll(bin_dirpath)
-			if remove_err != nil {
-				panic(remove_err)
+		if !reuse_bin {
+			if _, err := os.Stat(bin_dirpath); !os.IsNotExist(err) {
+				remove_err := os.RemoveAll(bin_dirpath)
+				if remove_err != nil {
+					panic(remove_err)
+				}
+
+				mkdir_err := os.MkdirAll(bin_dirpath, os.ModePerm)
+				if mkdir_err != nil {
+					panic(mkdir_err)
+				}
 			}
-
-			mkdir_err := os.MkdirAll(bin_dirpath, os.ModePerm)
-			if mkdir_err != nil {
-				panic(mkdir_err)
+		} else {
+			if _, err := os.Stat(bin_dirpath); os.IsNotExist(err) {
+				err_msg := fmt.Sprintf("bin_dirpath (%s) does not exist for reuse_bin=1", bin_dirpath)
+				panic(err_msg)
 			}
 		}
 
@@ -55,13 +63,15 @@ func main() {
 		options_file_dumper.Init(options_filepath)
 		options_file_dumper.WriteLines([]string{command_line_parser.StringifyOptions()})
 
-		compiler_ := new(compiler.Compiler)
-		compiler_.Init(command_line_parser)
-		compiler_.Compile()
+		if !reuse_bin {
+			compiler_ := new(compiler.Compiler)
+			compiler_.Init(command_line_parser)
+			compiler_.Compile()
 
-		linker_ := new(linker.Linker)
-		linker_.Init(command_line_parser)
-		linker_.Link()
+			linker_ := new(linker.Linker)
+			linker_.Init(command_line_parser)
+			linker_.Link()
+		}
 
 		task := new(program.Task)
 		task.Init(command_line_parser)
@@ -129,6 +139,11 @@ func InitCommandLineParser() *misc.CommandLineParser {
 
 	command_line_parser.AddOption(misc.STRING, "bin_dirpath",
 		"/home/via/uPIMulator/golang_vm/uPIMulator/bin", "path to the bin directory")
+	command_line_parser.AddOption(misc.INT, "reuse_bin", "0",
+		"reuse existing bin artifacts and skip compiler/linker phases")
+
+	command_line_parser.AddOption(misc.INT, "test_mmu", "0",
+		"enable MMU syscall injection test mode (inject syscalls every 1000 instructions)")
 
 	command_line_parser.AddOption(misc.INT, "logic_frequency", "350", "DPU logic frequency in MHz")
 	command_line_parser.AddOption(misc.INT, "memory_frequency", "2400",

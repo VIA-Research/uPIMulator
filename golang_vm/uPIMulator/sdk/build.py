@@ -28,6 +28,7 @@ if __name__ == "__main__":
             build_dir_path,
             "-G",
             "Ninja",
-        ]
+        ],
+        check=True,
     )
-    subprocess.run(["ninja", "-C", build_dir_path])
+    subprocess.run(["ninja", "-C", build_dir_path], check=True)

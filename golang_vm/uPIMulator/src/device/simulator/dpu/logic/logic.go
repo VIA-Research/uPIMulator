@@ -31,6 +31,8 @@ type Logic struct {
 	operand_collector *OperandCollector
 	dma               *Dma
 
+	kernel *Kernel
+
 	scoreboard map[*instruction.Instruction]*Thread
 
 	pipeline   *Pipeline
@@ -152,6 +154,15 @@ func (this *Logic) ConnectDma(dma *Dma) {
 	this.dma = dma
 }
 
+func (this *Logic) ConnectKernel(kernel_ptr *Kernel) {
+	if this.kernel != nil {
+		err := errors.New("Kernel is already set")
+		panic(err)
+	}
+
+	this.kernel = kernel_ptr
+}
+
 func (this *Logic) CycleRule() *CycleRule {
 	return this.cycle_rule
 }
@@ -198,6 +209,11 @@ func (this *Logic) ServiceThreadScheduler() {
 			}
 
 			this.stat_factory.Increment("num_instructions", 1)
+
+			// Inject test syscall for MMU measurement if enabled
+			if this.kernel != nil {
+				this.kernel.InjectTestSyscallIfNeeded(thread)
+			}
 		}
 
 		active_tasklets := fmt.Sprintf(
@@ -226,9 +242,7 @@ func (this *Logic) ServiceCycleRule() {
 	if this.cycle_rule.CanPop() {
 		instruction_ := this.cycle_rule.Pop()
 
-		if instruction_.Suffix() != instruction.DMA_RRI {
-			delete(this.scoreboard, instruction_)
-		} else {
+		if instruction_ != nil {
 			this.ExecuteInstruction(instruction_)
 		}
 	}
@@ -2047,6 +2061,17 @@ func (this *Logic) ExecuteCallZri(instruction_ *instruction.Instruction) {
 	}
 
 	thread.RegFile().ClearConditions()
+
+	// MMUV: Syscall intercept at address 0x0000 (Variante B)
+	if this.kernel != nil && result == 0 {
+		// Syscall entry: kernel handles PC update and returns
+		if this.kernel.SyscallDispatcher(thread) {
+			this.stat_factory.Increment("mmu_syscall_handled", 1)
+			this.SetFlags(instruction_, result, carry)
+			return
+		}
+	}
+
 	thread.RegFile().WritePcReg(result)
 
 	this.SetFlags(instruction_, result, carry)

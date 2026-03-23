@@ -31,6 +31,7 @@ type Dpu struct {
 	dma               *logic.Dma
 	logic             *logic.Logic
 
+	kernel       *logic.Kernel
 	stat_factory *misc.StatFactory
 }
 
@@ -112,6 +113,14 @@ func (this *Dpu) Init(
 	name := fmt.Sprintf("DPU%d-%d-%d", channel_id, rank_id, dpu_id)
 	this.stat_factory = new(misc.StatFactory)
 	this.stat_factory.Init(name)
+
+	this.kernel = new(logic.Kernel)
+	this.kernel.Init(this.stat_factory)
+	this.logic.ConnectKernel(this.kernel)
+
+	// Enable MMU test mode if requested (injects syscalls every 1000 instructions)
+	test_mmu := command_line_parser.IntParameter("test_mmu") != 0
+	this.kernel.SetTestMode(test_mmu)
 }
 
 func (this *Dpu) Fini() {
